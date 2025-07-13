@@ -10,6 +10,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+
 @Mapper(componentModel = "spring")
 public interface CustomerMapper {
      @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
@@ -17,6 +21,5 @@ public interface CustomerMapper {
 
     CustomerResponse toCustomerResponse(Customer customer);
     Customer fromCreateCustomerRequest(CreateCustomerRequest createCustomerRequest);
-
 
 }

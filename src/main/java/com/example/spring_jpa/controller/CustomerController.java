@@ -1,8 +1,7 @@
 package com.example.spring_jpa.controller;
 
-import com.example.spring_jpa.dto.CreateCustomerRequest;
-import com.example.spring_jpa.dto.CustomerResponse;
-import com.example.spring_jpa.dto.UpdateCustomerRequest;
+import com.example.spring_jpa.dto.*;
+import com.example.spring_jpa.service.AccountService;
 import com.example.spring_jpa.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +14,7 @@ import java.util.List;
 public class CustomerController {
 
     private final CustomerService customerService;
+    private final AccountService accountService;
 
     @GetMapping("/{phoneNumber}")
     public CustomerResponse getCustomerByPhoneNumber(@PathVariable String phoneNumber){

@@ -18,11 +18,11 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String actNo;
+
+    private String accNo;
     private BigDecimal balance;
     private BigDecimal overLimit;
     private Boolean isDeleted;
-
     @ManyToOne
     private Customer customer;
 
