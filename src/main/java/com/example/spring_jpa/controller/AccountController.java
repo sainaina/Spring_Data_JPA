@@ -1,11 +1,10 @@
 package com.example.spring_jpa.controller;
 
 
-import com.example.spring_jpa.dto.AccountResponse;
-import com.example.spring_jpa.dto.CreateAccountRequest;
-import com.example.spring_jpa.dto.CustomerResponse;
+import com.example.spring_jpa.dto.*;
 import com.example.spring_jpa.service.AccountService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,5 +28,20 @@ public class AccountController {
     public AccountResponse findByAccNo(@PathVariable String accNo){
         return accountService.findByAccNo(accNo);
     }
+    @DeleteMapping("/{actNo}")
+    public void deleteAccount(@PathVariable String actNo) {
+        accountService.deleteByAccNo(actNo);
+    }
+    @PatchMapping("/{accNo}")
+    public AccountResponse updateAccount(
+            @PathVariable String accNo,
+            @RequestBody UpdateAccountRequest request) {
+        return accountService.updateAccountByAccNo(accNo,request);
+    }
 
+    @PatchMapping("/{accNo}/disable")
+    public ResponseEntity<Void> disableAccount(@PathVariable String accNo) {
+        accountService.disableAccountByAccNo(accNo);
+        return ResponseEntity.noContent().build();
+    }
 }

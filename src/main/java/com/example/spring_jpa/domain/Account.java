@@ -24,6 +24,7 @@ public class Account {
     private BigDecimal overLimit;
     private Boolean isDeleted;
     @ManyToOne
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @ManyToOne

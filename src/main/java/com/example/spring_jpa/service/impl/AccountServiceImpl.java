@@ -1,8 +1,8 @@
 package com.example.spring_jpa.service.impl;
 
 import com.example.spring_jpa.domain.Account;
-import com.example.spring_jpa.dto.AccountResponse;
-import com.example.spring_jpa.dto.CreateAccountRequest;
+import com.example.spring_jpa.domain.Customer;
+import com.example.spring_jpa.dto.*;
 import com.example.spring_jpa.mapper.AccountMapper;
 import com.example.spring_jpa.repository.AccountRepository;
 import com.example.spring_jpa.service.AccountService;
@@ -51,7 +51,31 @@ public class AccountServiceImpl implements AccountService {
                 .map(accountMapper::toAccountResponse)
                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Phone Number not found") );
     }
+    //delete acc
+    @Override
+    public void deleteByAccNo(String actNo) {
+        Account account = accountRepository.findByAccNo(actNo)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+        accountRepository.delete(account);
+    }
 
+    //update acc
+    @Override
+    public AccountResponse updateAccountByAccNo(String accNo, UpdateAccountRequest updateRequest) {
+        Account account = accountRepository.findByAccNo(accNo)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+        accountMapper.toAccountPartially(updateRequest, account);
+        Account updatedAccount = accountRepository.save(account);
+        return accountMapper.toAccountResponse(updatedAccount);
+    }
 
+    @Override
+    public void disableAccountByAccNo(String accNo) {
+        Account account = accountRepository.findByAccNo(accNo)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+
+        account.setIsDeleted(true);
+        accountRepository.save(account);
+    }
 
 }
