@@ -49,7 +49,7 @@ public class AccountServiceImpl implements AccountService {
         return  accountRepository
                 .findByAccNo(AccNo)
                 .map(accountMapper::toAccountResponse)
-                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Phone Number not found") );
+                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account Number not found") );
     }
     //delete acc
     @Override

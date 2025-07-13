@@ -18,7 +18,8 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+    private String fullName;
+    private String phoneNumber;
     private String accNo;
     private BigDecimal balance;
     private BigDecimal overLimit;
