@@ -4,6 +4,7 @@ import com.example.spring_jpa.dto.*;
 import com.example.spring_jpa.service.AccountService;
 import com.example.spring_jpa.service.CustomerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,5 +35,11 @@ public class CustomerController {
     public CustomerResponse createNew(@RequestBody CreateCustomerRequest createCustomerRequest) {
         return customerService.createNew(createCustomerRequest);
     }
+    @PutMapping("/disable/{phoneNumber}")
+    public ResponseEntity<String> disableAccountByPhoneNumber(@PathVariable String phoneNumber) {
+        customerService.disableAccountByPhoneNumber(phoneNumber);
+        return ResponseEntity.ok("Customer account has been disabled successfully.");
+    }
+
 }
 

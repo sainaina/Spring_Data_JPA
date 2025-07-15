@@ -13,25 +13,32 @@ import java.util.List;
 @RequestMapping("/api/v1/accounts")
 @RequiredArgsConstructor
 public class AccountController {
-
     private final AccountService accountService;
+
 
     @PostMapping
     public AccountResponse createNew(@RequestBody CreateAccountRequest createAccountRequest) {
         return accountService.createAccount(createAccountRequest);
     }
+
+
     @GetMapping
     public List<AccountResponse> findAll(){
         return accountService.findAll();
     }
+
+
     @GetMapping("/{accNo}")
     public AccountResponse findByAccNo(@PathVariable String accNo){
         return accountService.findByAccNo(accNo);
     }
+
+
     @DeleteMapping("/{actNo}")
     public void deleteAccount(@PathVariable String actNo) {
         accountService.deleteByAccNo(actNo);
     }
+
     @PatchMapping("/{accNo}")
     public AccountResponse updateAccount(
             @PathVariable String accNo,
@@ -39,9 +46,11 @@ public class AccountController {
         return accountService.updateAccountByAccNo(accNo,request);
     }
 
-    @PatchMapping("/{accNo}/disable")
+
+    @PutMapping("/{accNo}/disable")
     public ResponseEntity<Void> disableAccount(@PathVariable String accNo) {
         accountService.disableAccountByAccNo(accNo);
         return ResponseEntity.noContent().build();
     }
+
 }

@@ -5,12 +5,14 @@ import com.example.spring_jpa.domain.Customer;
 import com.example.spring_jpa.dto.*;
 import com.example.spring_jpa.mapper.AccountMapper;
 import com.example.spring_jpa.repository.AccountRepository;
+import com.example.spring_jpa.repository.CustomerRepository;
 import com.example.spring_jpa.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -19,15 +21,35 @@ public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository accountRepository;
     private final AccountMapper accountMapper;
+    private final CustomerRepository customerRepository;
 
-    //create account
+    //create
     @Override
     public AccountResponse createAccount(CreateAccountRequest createAccountRequest) {
         if (accountRepository.existsByAccNo(createAccountRequest.accNo())) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Account already exists with actNo: " + createAccountRequest.accNo());
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "Account already exists with actNo: " + createAccountRequest.accNo());
         }
+
         Account account = accountMapper.toEntity(createAccountRequest);
         account.setIsDeleted(false);
+
+        Customer customer = customerRepository.findByPhoneNumber(createAccountRequest.phoneNumber())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Customer not found with phone number: " + createAccountRequest.phoneNumber()));
+
+        account.setCustomer(customer);
+
+        String segment = customer.getSegment();
+        if (segment != null) {
+            switch (segment.toUpperCase()) {
+                case "GOLD" -> account.setOverLimit(BigDecimal.valueOf(50000));
+                case "SILVER" -> account.setOverLimit(BigDecimal.valueOf(10000));
+                case "REGULAR" -> account.setOverLimit(BigDecimal.valueOf(5000));
+                default -> account.setOverLimit(BigDecimal.ZERO);
+            }
+        }
+
         Account savedAccount = accountRepository.save(account);
         return accountMapper.toAccountResponse(savedAccount);
     }

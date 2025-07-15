@@ -1,6 +1,5 @@
 package com.example.spring_jpa.mapper;
 
-
 import com.example.spring_jpa.domain.Customer;
 import com.example.spring_jpa.dto.CreateCustomerRequest;
 import com.example.spring_jpa.dto.CustomerResponse;
@@ -9,10 +8,6 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
 
 @Mapper(componentModel = "spring")
 public interface CustomerMapper {

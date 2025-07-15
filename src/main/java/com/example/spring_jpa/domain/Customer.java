@@ -34,9 +34,14 @@ public class Customer {
     @Column(nullable = false)
     private Boolean isDeleted;
 
+    private String segment;
+
     @OneToMany(mappedBy = "customer")
     private List<Account> accounts;
 
-    @OneToOne(mappedBy = "customer")
+    @OneToOne(mappedBy = "customer",optional = false)
     private KYC kyc;
+
+    @ManyToOne
+    private CustomerSegment customerSegment;
 }
