@@ -4,6 +4,7 @@ package com.example.spring_jpa.controller;
 import com.example.spring_jpa.dto.*;
 import com.example.spring_jpa.service.AccountService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ import java.util.List;
 public class AccountController {
     private final AccountService accountService;
 
-
+@ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public AccountResponse createNew(@RequestBody CreateAccountRequest createAccountRequest) {
         return accountService.createAccount(createAccountRequest);
@@ -52,5 +53,4 @@ public class AccountController {
         accountService.disableAccountByAccNo(accNo);
         return ResponseEntity.noContent().build();
     }
-
 }

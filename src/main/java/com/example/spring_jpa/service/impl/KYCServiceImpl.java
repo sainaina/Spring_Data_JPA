@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-
 @Service
 @RequiredArgsConstructor
 public class KYCServiceImpl implements KYCService {
@@ -21,7 +20,6 @@ public class KYCServiceImpl implements KYCService {
     public void verifyKYCByCustomerId(Integer customerId) {
         KYC kyc = kycRepository.findByCustomerId(customerId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "KYC not found for customer id " + customerId));
-
         kyc.setIsVerified(true);
         kycRepository.save(kyc);
     }

@@ -20,8 +20,11 @@ public class AccountType {
     private Integer id;
 
     @Column(nullable = false, unique = true,length = 50)
-    private String typeName;
+    private String type;
 
+    @Column(nullable = false)
+    private Boolean isDeleted;
+    
     @OneToMany(mappedBy = "accountType")
     private List<Account> accounts;
 }

@@ -13,7 +13,5 @@ public interface CustomerService {
         List<CustomerResponse> findAll();
         CustomerResponse findByPhoneNumber(String phoneNumber);
         CustomerResponse updateByPhoneNumber(String phoneNumber, UpdateCustomerRequest  updateCustomerRequest);
-
-
         void disableAccountByPhoneNumber(String phoneNumber);
 }

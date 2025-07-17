@@ -1,13 +1,14 @@
 package com.example.spring_jpa.dto;
 
+import com.example.spring_jpa.util.CurrencyUtil;
+
 import java.math.BigDecimal;
 
 public record CreateAccountRequest(
-        String fullName,
-        String phoneNumber,
-        String accNo,
+        String actNo,
+        String actName,
+        CurrencyUtil actCurrency,
         BigDecimal balance,
-        BigDecimal overLimit,
-        Boolean isDeleted
-) {
-}
+        String accountType,
+        String phoneNumber
+) {}

@@ -5,11 +5,11 @@ import com.example.spring_jpa.domain.AccountType;
 import java.math.BigDecimal;
 
 public record AccountResponse(
-        String fullName,
-        String phoneNumber,
-        String accNo,
+        String actNo,
+        String actName,
+        String actCurrency,
         BigDecimal balance,
-        BigDecimal overLimit,
-        Boolean isDeleted
-) {}
-
+        Boolean isHide,
+        String accountType
+) {
+}

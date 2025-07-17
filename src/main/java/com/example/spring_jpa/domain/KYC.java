@@ -12,15 +12,16 @@ import lombok.Setter;
 @Entity
 public class KYC {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String uuid;
+    private Integer id;
     @Column(unique = true, nullable = false, length = 12)
-    private String nationalCard;
+    private String nationalCardId;
     @Column(nullable = false)
     private Boolean isVerified;
     @Column(nullable = false)
     private Boolean isDeleted;
     @OneToOne(optional = false)
+    @MapsId
+    @JoinColumn(nullable = false)
     private Customer customer;
 
 }
