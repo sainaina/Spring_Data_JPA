@@ -15,20 +15,36 @@ import java.util.List;
 @Setter
 @Entity
 public class Account {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String fullName;
-    private String phoneNumber;
-    private String accNo;
+
+    @Column(unique = true, nullable = false, length = 32)
+    private String actNo;
+
+    @Column(nullable = false, length = 50)
+    private String actName;
+
+    @Column(nullable = false, length = 15)
+    private String actCurrency;
+
+    @Column(nullable = false)
     private BigDecimal balance;
+
+    @Column(nullable = false)
     private BigDecimal overLimit;
+
+    @Column(nullable = false)
+    private Boolean isHide;
+
+    @Column(nullable = false)
     private Boolean isDeleted;
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name = "acc_type_id")
+    @JoinColumn(nullable = false, name = "cust_id", referencedColumnName = "id")
+    private Customer customer;
+
+    @ManyToOne(optional = false)
     private AccountType accountType;
 }

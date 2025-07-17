@@ -19,10 +19,12 @@ public class AccountType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, unique = true)
-    private String typeName;
+    @Column(nullable = false, unique = true,length = 50)
+    private String type;
 
+    @Column(nullable = false)
+    private Boolean isDeleted;
+    
     @OneToMany(mappedBy = "accountType")
     private List<Account> accounts;
-
 }

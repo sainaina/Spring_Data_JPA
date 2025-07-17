@@ -7,6 +7,5 @@ import lombok.Builder;
 public record CustomerResponse(
         String fullName,
         String gender,
-        String email,
-        String phoneNumber) {
+        String email) {
 }

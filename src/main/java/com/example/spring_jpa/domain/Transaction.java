@@ -28,7 +28,6 @@ public class Transaction {
     @Column(columnDefinition = "TEXT")
     private String remark;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender_id", nullable = false)
     private Account sender;
