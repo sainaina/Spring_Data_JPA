@@ -24,7 +24,7 @@ public class CustomerSegmentInitialize {
             regular.setDescription("Regular segment");
 
             CustomerSegment silver = new CustomerSegment();
-            silver.setSegment("SILVER");
+                silver.setSegment("SILVER");
             silver.setIsDeleted(false);
             silver.setDescription("Silver segment");
 
